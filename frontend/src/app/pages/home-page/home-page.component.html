@@ -1,6 +1,8 @@
 <pre><code>{{ bookmarklet() }}</code></pre>
 
-<a [href]="sanitizedBookmarklet()" onclick="return false">name</a>
+<button (click)="copyToClipboard()">Copy</button>
+
+<a [href]="sanitizedBookmarklet()" (click)="$event.preventDefault()">name</a>
 
 <ngs-code-editor
   [theme]="editorTheme"

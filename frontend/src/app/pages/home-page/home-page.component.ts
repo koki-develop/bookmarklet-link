@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, computed, inject, signal } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { CodeEditorModule, CodeModel } from '@ngstack/code-editor';
+import copy from 'copy-to-clipboard';
 
 const initialCode = `
 (function () {
@@ -45,4 +46,8 @@ export class HomePageComponent {
     const bookmarklet = this.bookmarklet();
     return this.#sanitizer.bypassSecurityTrustUrl(bookmarklet);
   });
+
+  copyToClipboard() {
+    copy(this.bookmarklet());
+  }
 }
