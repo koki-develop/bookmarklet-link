@@ -19,6 +19,7 @@
     "@angular/platform-browser-dynamic": "^17.3.0",
     "@angular/router": "^17.3.0",
     "@ngstack/code-editor": "^7.2.0",
+    "copy-to-clipboard": "^3.3.3",
     "primeng": "^17.13.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
