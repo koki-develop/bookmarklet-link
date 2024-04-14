@@ -1,8 +1,6 @@
-<p>bookmarklet: {{ bookmarklet() }}</p>
-
-<a [href]="sanitizedBookmarklet()">name</a>
-
 <pre><code>{{ bookmarklet() }}</code></pre>
+
+<a [href]="sanitizedBookmarklet()" onclick="return false">name</a>
 
 <ngs-code-editor
   [theme]="editorTheme"
