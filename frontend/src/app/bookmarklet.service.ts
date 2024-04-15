@@ -1,9 +1,17 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class BookmarkletService {
+  readonly #sanitizer = inject(DomSanitizer);
 
-  constructor() { }
+  toBookmarklet(code: string) {
+    return `javascript:${encodeURIComponent(code)}`;
+  }
+
+  sanitize(bookmarklet: string) {
+    return this.#sanitizer.bypassSecurityTrustUrl(bookmarklet);
+  }
 }
