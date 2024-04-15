@@ -1,3 +1,25 @@
-<main class="container p-4 mx-auto">
-  <router-outlet />
-</main>
+<div class="flex min-h-screen flex-col">
+  <header class="shadow">
+    <div class="container mx-auto px-4 py-2">
+      <h1>Bookmarklet.link</h1>
+    </div>
+  </header>
+
+  <main class="container mx-auto flex-grow p-4">
+    <router-outlet />
+  </main>
+
+  <footer class="p-8">
+    <ul class="flex flex-col items-center justify-center gap-2 text-gray-500">
+      <li>&copy; 2024 Koki Sato</li>
+      <li>
+        <a
+          href="https://github.com/koki-develop/bookmarklet-link"
+          target="_blank"
+          rel="noreferrer"
+          >GitHub</a
+        >
+      </li>
+    </ul>
+  </footer>
+</div>
