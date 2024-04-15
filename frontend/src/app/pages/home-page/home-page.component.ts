@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { tablerArrowBigUp, tablerPlayerPlay } from '@ng-icons/tabler-icons';
 import { CodeEditorModule, CodeModel } from '@ngstack/code-editor';
 import { PreviewComponent } from './components/preview/preview.component';
+import { EditorComponent } from './components/editor/editor.component';
 
 const initialCode = `
 (function() {
@@ -15,10 +16,8 @@ const initialCode = `
   selector: 'app-home-page',
   standalone: true,
   imports: [
-    // modules
-    CodeEditorModule,
-    FormsModule,
     // components
+    EditorComponent,
     NgIconComponent,
     PreviewComponent,
   ],
@@ -32,22 +31,8 @@ const initialCode = `
   ],
 })
 export class HomePageComponent {
-  readonly name = 'Bookmarklet';
-
-  readonly codeModel: CodeModel = {
-    language: 'javascript',
-    value: initialCode,
-    uri: 'index.js',
-  };
-
-  readonly editorTheme = 'vs-dark';
-
-  readonly editorOptions = {
-    contextmenu: false,
-    minimap: {
-      enabled: false,
-    },
-  };
+  readonly name = signal<string>('Bookmarklet');
+  readonly code = signal<string>(initialCode);
 
   run(code: string) {
     eval(code);

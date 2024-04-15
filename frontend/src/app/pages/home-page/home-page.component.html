@@ -5,32 +5,20 @@
       ブックマークバーにドラッグ & ドロップ
     </div>
 
-    <app-preview [name]="name" [code]="codeModel.value" />
+    <app-preview [name]="name()" [code]="code()" />
   </div>
 
-  <div class="flex flex-col gap-2">
-    <div class="flex flex-col">
-      <label for="name" class="text-sm text-gray-500">タイトル</label>
-      <input
-        id="name"
-        class="w-1/2 rounded border border-gray-300 p-2 outline-none sm:w-1/3"
-        type="text"
-        placeholder="Bookmarklet"
-        [(ngModel)]="name"
-      />
-    </div>
-
-    <ngs-code-editor
-      [theme]="editorTheme"
-      [codeModel]="codeModel"
-      [options]="editorOptions"
-    />
-  </div>
+  <app-editor
+    [name]="name()"
+    (nameChanged)="name.set($event)"
+    [code]="code()"
+    (codeChanged)="code.set($event)"
+  />
 
   <div>
     <button
       class="flex items-center gap-2 rounded bg-blue-500 px-4 py-2 text-white transition hover:bg-blue-600"
-      (click)="run(codeModel.value)"
+      (click)="run(code())"
     >
       <ng-icon name="play" />
       実行
