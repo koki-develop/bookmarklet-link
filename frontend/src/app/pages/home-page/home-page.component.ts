@@ -8,7 +8,6 @@ import {
   tablerPlayerPlay,
   tablerArrowNarrowUp,
 } from '@ng-icons/tabler-icons';
-import { BookmarkletService } from '../../services/bookmarklet.service';
 import { FormsModule } from '@angular/forms';
 import { SafeUrlPipe } from '../../pipes/safe-url.pipe';
 import { BookmarkletPipe } from '../../pipes/bookmarklet.pipe';
@@ -45,7 +44,6 @@ const initialCode = `
   ],
 })
 export class HomePageComponent {
-  readonly #bookmarkletService = inject(BookmarkletService);
   readonly #bookmarkletPipe = inject(BookmarkletPipe);
 
   readonly name = 'Bookmarklet';
@@ -69,7 +67,7 @@ export class HomePageComponent {
 
   runCode() {
     const code = this.code();
-    this.#bookmarkletService.run(code);
+    eval(code);
   }
 
   copyToClipboard() {
