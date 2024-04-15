@@ -2,11 +2,17 @@ import { Component, computed, inject, signal } from '@angular/core';
 import { CodeEditorModule, CodeModel } from '@ngstack/code-editor';
 import copy from 'copy-to-clipboard';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
-import { tablerCopy, tablerLink } from '@ng-icons/tabler-icons';
+import {
+  tablerCopy,
+  tablerLink,
+  tablerPlayerPlay,
+  tablerArrowNarrowUp,
+} from '@ng-icons/tabler-icons';
 import { BookmarkletService } from '../../bookmarklet.service';
+import { FormsModule } from '@angular/forms';
 
 const initialCode = `
-(function () {
+(function() {
   alert('Hello, world!');
 })();
 `.trim();
@@ -14,10 +20,17 @@ const initialCode = `
 @Component({
   selector: 'app-home-page',
   standalone: true,
-  imports: [CodeEditorModule, NgIconComponent],
+  imports: [CodeEditorModule, FormsModule, NgIconComponent],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.css',
-  viewProviders: [provideIcons({ tablerCopy, tablerLink })],
+  viewProviders: [
+    provideIcons({
+      tablerArrowNarrowUp,
+      tablerCopy,
+      tablerLink,
+      tablerPlayerPlay,
+    }),
+  ],
 })
 export class HomePageComponent {
   readonly #bookmarkletService = inject(BookmarkletService);
@@ -50,6 +63,11 @@ export class HomePageComponent {
     const bookmarklet = this.bookmarklet();
     return this.#bookmarkletService.sanitize(bookmarklet);
   });
+
+  runCode() {
+    const code = this.code();
+    this.#bookmarkletService.run(code);
+  }
 
   copyToClipboard(value: string) {
     copy(value);
