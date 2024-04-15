@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
-import { tablerArrowBigUp, tablerPlayerPlay } from '@ng-icons/tabler-icons';
+import { tablerPlayerPlay } from '@ng-icons/tabler-icons';
 import { EditorComponent } from './components/editor/editor.component';
 import { PreviewComponent } from './components/preview/preview.component';
 
@@ -23,7 +23,6 @@ const initialCode = `
   styleUrl: './home-page.component.css',
   viewProviders: [
     provideIcons({
-      arrowUp: tablerArrowBigUp,
       play: tablerPlayerPlay,
     }),
   ],

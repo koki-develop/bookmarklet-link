@@ -1,6 +1,12 @@
 import { Component, computed, inject, input, signal } from '@angular/core';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
-import { tablerCheck, tablerCopy, tablerLink } from '@ng-icons/tabler-icons';
+import {
+  tablerArrowBigUp,
+  tablerCheck,
+  tablerCopy,
+  tablerLink,
+} from '@ng-icons/tabler-icons';
+import { DeviceDetectorService } from 'ngx-device-detector';
 import { BookmarkletPipe } from '../../../../pipes/bookmarklet.pipe';
 import { SafeUrlPipe } from '../../../../pipes/safe-url.pipe';
 import { ClipboardService } from '../../../../services/clipboard.service';
@@ -14,6 +20,7 @@ import { ClipboardService } from '../../../../services/clipboard.service';
   providers: [BookmarkletPipe],
   viewProviders: [
     provideIcons({
+      arrowUp: tablerArrowBigUp,
       check: tablerCheck,
       copy: tablerCopy,
       link: tablerLink,
@@ -23,6 +30,9 @@ import { ClipboardService } from '../../../../services/clipboard.service';
 export class PreviewComponent {
   readonly #clipboardService = inject(ClipboardService);
   readonly #bookmarkletPipe = inject(BookmarkletPipe);
+  readonly #deviceDetector = inject(DeviceDetectorService);
+
+  readonly isDesktop = this.#deviceDetector.isDesktop();
 
   #copiedCount = signal<number>(0);
   readonly copied = computed(() => this.#copiedCount() > 0);

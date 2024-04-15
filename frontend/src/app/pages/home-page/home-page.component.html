@@ -1,12 +1,5 @@
 <div class="flex flex-col gap-4">
-  <div>
-    <div class="ml-4 flex items-center text-sm">
-      <ng-icon class="text-lg text-blue-500" name="arrowUp" />
-      ブックマークバーにドラッグ & ドロップ
-    </div>
-
-    <app-preview [name]="name()" [code]="code()" />
-  </div>
+  <app-preview [name]="name()" [code]="code()" />
 
   <app-editor
     [name]="name()"
