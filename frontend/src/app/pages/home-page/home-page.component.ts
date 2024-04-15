@@ -1,16 +1,16 @@
 import { Component, inject, signal } from '@angular/core';
-import { CodeEditorModule, CodeModel } from '@ngstack/code-editor';
-import copy from 'copy-to-clipboard';
+import { FormsModule } from '@angular/forms';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import {
+  tablerArrowNarrowUp,
   tablerCopy,
   tablerLink,
   tablerPlayerPlay,
-  tablerArrowNarrowUp,
 } from '@ng-icons/tabler-icons';
-import { FormsModule } from '@angular/forms';
-import { SafeUrlPipe } from '../../pipes/safe-url.pipe';
+import { CodeEditorModule, CodeModel } from '@ngstack/code-editor';
+import copy from 'copy-to-clipboard';
 import { BookmarkletPipe } from '../../pipes/bookmarklet.pipe';
+import { SafeUrlPipe } from '../../pipes/safe-url.pipe';
 
 const initialCode = `
 (function() {
