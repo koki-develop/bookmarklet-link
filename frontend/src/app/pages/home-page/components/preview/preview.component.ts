@@ -1,9 +1,9 @@
-import { Component, input, inject, computed, signal } from '@angular/core';
+import { Component, computed, inject, input, signal } from '@angular/core';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
-import copy from 'copy-to-clipboard';
+import { tablerCheck, tablerCopy, tablerLink } from '@ng-icons/tabler-icons';
 import { BookmarkletPipe } from '../../../../pipes/bookmarklet.pipe';
 import { SafeUrlPipe } from '../../../../pipes/safe-url.pipe';
-import { tablerCheck, tablerCopy, tablerLink } from '@ng-icons/tabler-icons';
+import { ClipboardService } from '../../../../services/clipboard.service';
 
 @Component({
   selector: 'app-preview',
@@ -21,6 +21,7 @@ import { tablerCheck, tablerCopy, tablerLink } from '@ng-icons/tabler-icons';
   ],
 })
 export class PreviewComponent {
+  readonly #clipboardService = inject(ClipboardService);
   readonly #bookmarkletPipe = inject(BookmarkletPipe);
 
   #copiedCount = signal<number>(0);
@@ -29,10 +30,9 @@ export class PreviewComponent {
   readonly name = input.required<string>();
   readonly code = input.required<string>();
 
-  copyToClipboard() {
+  async copyToClipboard() {
     const bookmarklet = this.#bookmarkletPipe.transform(this.code());
-    if (!copy(bookmarklet)) return;
-
+    await this.#clipboardService.copy(bookmarklet);
     this.#copiedCount.update((count) => count + 1);
     setTimeout(() => this.#copiedCount.update((count) => count - 1), 1500);
   }
