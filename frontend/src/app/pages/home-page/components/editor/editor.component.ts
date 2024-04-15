@@ -12,7 +12,7 @@ import { CodeEditorModule, CodeModel } from '@ngstack/code-editor';
 @Component({
   selector: 'app-editor',
   standalone: true,
-  imports: [FormsModule, CodeEditorModule],
+  imports: [CodeEditorModule],
   templateUrl: './editor.component.html',
   styleUrl: './editor.component.css',
 })
