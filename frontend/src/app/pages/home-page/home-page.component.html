@@ -5,7 +5,7 @@
       ブックマークバーにドラッグ & ドロップ
     </div>
 
-    <app-preview [name]="name" [code]="code()" />
+    <app-preview [name]="name" [code]="codeModel.value" />
   </div>
 
   <div class="flex flex-col gap-2">
@@ -24,14 +24,13 @@
       [theme]="editorTheme"
       [codeModel]="codeModel"
       [options]="editorOptions"
-      (valueChanged)="code.set($event)"
     />
   </div>
 
   <div>
     <button
       class="flex items-center gap-2 rounded bg-blue-500 px-4 py-2 text-white transition hover:bg-blue-600"
-      (click)="runCode()"
+      (click)="run(codeModel.value)"
     >
       <ng-icon name="play" />
       実行

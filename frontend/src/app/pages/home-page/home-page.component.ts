@@ -56,10 +56,7 @@ export class HomePageComponent {
     },
   };
 
-  readonly code = signal<string>(initialCode);
-
-  runCode() {
-    const code = this.code();
+  run(code: string) {
     eval(code);
   }
 }
