@@ -1,1 +1,18 @@
-<p>preview works!</p>
+<a
+  class="flex cursor-grab items-center rounded-l bg-blue-500 px-4 text-lg text-white transition hover:bg-blue-600 active:cursor-grabbing"
+  [href]="code() | bookmarklet | safeUrl"
+  (click)="$event.preventDefault()"
+>
+  <ng-icon name="link" />
+  <span class="sr-only">{{ name() }}</span>
+</a>
+<code
+  class="flex-grow overflow-auto whitespace-nowrap bg-gray-800 p-2 text-sm text-gray-200"
+  >{{ code() | bookmarklet }}</code
+>
+<button
+  class="flex items-center rounded-r bg-gray-400 px-4 text-lg text-white transition hover:bg-gray-500"
+  (click)="copyToClipboard()"
+>
+  <ng-icon name="copy" />
+</button>

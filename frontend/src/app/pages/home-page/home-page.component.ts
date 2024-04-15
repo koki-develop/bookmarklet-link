@@ -8,9 +8,7 @@ import {
   tablerPlayerPlay,
 } from '@ng-icons/tabler-icons';
 import { CodeEditorModule, CodeModel } from '@ngstack/code-editor';
-import copy from 'copy-to-clipboard';
-import { BookmarkletPipe } from '../../pipes/bookmarklet.pipe';
-import { SafeUrlPipe } from '../../pipes/safe-url.pipe';
+import { PreviewComponent } from './components/preview/preview.component';
 
 const initialCode = `
 (function() {
@@ -27,13 +25,10 @@ const initialCode = `
     FormsModule,
     // components
     NgIconComponent,
-    // pipes
-    BookmarkletPipe,
-    SafeUrlPipe,
+    PreviewComponent,
   ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.css',
-  providers: [BookmarkletPipe],
   viewProviders: [
     provideIcons({
       arrowUp: tablerArrowBigUp,
@@ -44,8 +39,6 @@ const initialCode = `
   ],
 })
 export class HomePageComponent {
-  readonly #bookmarkletPipe = inject(BookmarkletPipe);
-
   readonly name = 'Bookmarklet';
 
   readonly codeModel: CodeModel = {
@@ -68,10 +61,5 @@ export class HomePageComponent {
   runCode() {
     const code = this.code();
     eval(code);
-  }
-
-  copyToClipboard() {
-    const bookmarklet = this.#bookmarkletPipe.transform(this.code());
-    copy(bookmarklet);
   }
 }
