@@ -1,7 +1,9 @@
-<div class="ml-4 flex items-center text-sm">
-  <ng-icon class="text-lg text-blue-500" name="arrowUp" />
-  ブックマークバーにドラッグ & ドロップ
-</div>
+@if (isDesktop) {
+  <div class="ml-4 flex items-center text-sm">
+    <ng-icon class="text-lg text-blue-500" name="arrowUp" />
+    ブックマークバーにドラッグ & ドロップ
+  </div>
+}
 <div class="flex">
   <a
     class="flex cursor-grab items-center rounded-l bg-blue-500 px-4 text-lg text-white transition hover:bg-blue-600 active:cursor-grabbing"
