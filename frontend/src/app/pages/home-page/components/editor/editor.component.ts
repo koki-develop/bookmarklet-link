@@ -1,13 +1,6 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-  input,
-} from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, EventEmitter, OnInit, Output, input } from '@angular/core';
 import { CodeEditorModule, CodeModel } from '@ngstack/code-editor';
+import { editor } from 'monaco-editor';
 
 @Component({
   selector: 'app-editor',
@@ -35,7 +28,8 @@ export class EditorComponent implements OnInit {
 
   readonly editorTheme = 'vs-dark';
 
-  readonly editorOptions = {
+  readonly editorOptions: editor.IStandaloneEditorConstructionOptions = {
+    fontSize: 14,
     contextmenu: false,
     minimap: {
       enabled: false,
