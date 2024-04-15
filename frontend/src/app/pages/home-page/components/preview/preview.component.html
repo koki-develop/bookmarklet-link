@@ -14,5 +14,9 @@
   class="flex items-center rounded-r bg-gray-400 px-4 text-lg text-white transition hover:bg-gray-500"
   (click)="copyToClipboard()"
 >
-  <ng-icon name="copy" />
+  @if (copied()) {
+    <ng-icon name="check" class="text-green-300" />
+  } @else {
+    <ng-icon name="copy" />
+  }
 </button>
