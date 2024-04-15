@@ -24,7 +24,6 @@
     "@ng-icons/core": "^27.3.1",
     "@ng-icons/tabler-icons": "^27.3.1",
     "@ngstack/code-editor": "^7.2.0",
-    "copy-to-clipboard": "^3.3.3",
     "monaco-editor": "^0.47.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
