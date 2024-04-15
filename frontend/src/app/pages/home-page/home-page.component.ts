@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { CodeEditorModule, CodeModel } from '@ngstack/code-editor';
 import copy from 'copy-to-clipboard';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
@@ -11,6 +11,7 @@ import {
 import { BookmarkletService } from '../../services/bookmarklet.service';
 import { FormsModule } from '@angular/forms';
 import { SafeUrlPipe } from '../../pipes/safe-url.pipe';
+import { BookmarkletPipe } from '../../pipes/bookmarklet.pipe';
 
 const initialCode = `
 (function() {
@@ -21,9 +22,19 @@ const initialCode = `
 @Component({
   selector: 'app-home-page',
   standalone: true,
-  imports: [CodeEditorModule, FormsModule, NgIconComponent, SafeUrlPipe],
+  imports: [
+    // modules
+    CodeEditorModule,
+    FormsModule,
+    // components
+    NgIconComponent,
+    // pipes
+    BookmarkletPipe,
+    SafeUrlPipe,
+  ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.css',
+  providers: [BookmarkletPipe],
   viewProviders: [
     provideIcons({
       tablerArrowNarrowUp,
@@ -35,6 +46,7 @@ const initialCode = `
 })
 export class HomePageComponent {
   readonly #bookmarkletService = inject(BookmarkletService);
+  readonly #bookmarkletPipe = inject(BookmarkletPipe);
 
   readonly name = 'Bookmarklet';
 
@@ -55,17 +67,13 @@ export class HomePageComponent {
 
   readonly code = signal<string>(initialCode);
 
-  readonly bookmarklet = computed(() => {
-    const code = this.code();
-    return this.#bookmarkletService.toBookmarklet(code);
-  });
-
   runCode() {
     const code = this.code();
     this.#bookmarkletService.run(code);
   }
 
-  copyToClipboard(value: string) {
-    copy(value);
+  copyToClipboard() {
+    const bookmarklet = this.#bookmarkletPipe.transform(this.code());
+    copy(bookmarklet);
   }
 }
