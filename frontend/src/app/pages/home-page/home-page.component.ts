@@ -10,6 +10,7 @@ import {
 } from '@ng-icons/tabler-icons';
 import { BookmarkletService } from '../../services/bookmarklet.service';
 import { FormsModule } from '@angular/forms';
+import { SafeUrlPipe } from '../../pipes/safe-url.pipe';
 
 const initialCode = `
 (function() {
@@ -20,7 +21,7 @@ const initialCode = `
 @Component({
   selector: 'app-home-page',
   standalone: true,
-  imports: [CodeEditorModule, FormsModule, NgIconComponent],
+  imports: [CodeEditorModule, FormsModule, NgIconComponent, SafeUrlPipe],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.css',
   viewProviders: [
@@ -57,11 +58,6 @@ export class HomePageComponent {
   readonly bookmarklet = computed(() => {
     const code = this.code();
     return this.#bookmarkletService.toBookmarklet(code);
-  });
-
-  readonly sanitizedBookmarklet = computed(() => {
-    const bookmarklet = this.bookmarklet();
-    return this.#bookmarkletService.sanitize(bookmarklet);
   });
 
   runCode() {
