@@ -1,12 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
-import {
-  tablerArrowBigUp,
-  tablerCopy,
-  tablerLink,
-  tablerPlayerPlay,
-} from '@ng-icons/tabler-icons';
+import { tablerArrowBigUp, tablerPlayerPlay } from '@ng-icons/tabler-icons';
 import { CodeEditorModule, CodeModel } from '@ngstack/code-editor';
 import { PreviewComponent } from './components/preview/preview.component';
 
@@ -32,8 +27,6 @@ const initialCode = `
   viewProviders: [
     provideIcons({
       arrowUp: tablerArrowBigUp,
-      copy: tablerCopy,
-      link: tablerLink,
       play: tablerPlayerPlay,
     }),
   ],
