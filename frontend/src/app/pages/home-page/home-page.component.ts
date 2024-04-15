@@ -2,7 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import {
-  tablerArrowNarrowUp,
+  tablerArrowBigUp,
   tablerCopy,
   tablerLink,
   tablerPlayerPlay,
@@ -36,10 +36,10 @@ const initialCode = `
   providers: [BookmarkletPipe],
   viewProviders: [
     provideIcons({
-      tablerArrowNarrowUp,
-      tablerCopy,
-      tablerLink,
-      tablerPlayerPlay,
+      arrowUp: tablerArrowBigUp,
+      copy: tablerCopy,
+      link: tablerLink,
+      play: tablerPlayerPlay,
     }),
   ],
 })
