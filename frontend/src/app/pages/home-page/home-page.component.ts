@@ -8,7 +8,7 @@ import {
   tablerPlayerPlay,
   tablerArrowNarrowUp,
 } from '@ng-icons/tabler-icons';
-import { BookmarkletService } from '../../bookmarklet.service';
+import { BookmarkletService } from '../../services/bookmarklet.service';
 import { FormsModule } from '@angular/forms';
 
 const initialCode = `
