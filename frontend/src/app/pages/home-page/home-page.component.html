@@ -1,8 +1,23 @@
-<pre><code>{{ bookmarklet() }}</code></pre>
-
-<button (click)="copyToClipboard()">Copy</button>
-
-<a [href]="sanitizedBookmarklet()" (click)="$event.preventDefault()">name</a>
+<div class="mb-4 flex">
+  <a
+    class="flex cursor-grab items-center rounded-l bg-blue-500 px-4 text-white active:cursor-grabbing"
+    [href]="sanitizedBookmarklet()"
+    (click)="$event.preventDefault()"
+  >
+    <ng-icon name="tablerLink" />
+    <span class="sr-only">{{ name }}</span>
+  </a>
+  <code
+    class="flex-grow overflow-auto whitespace-nowrap bg-gray-800 p-2 text-sm text-gray-200"
+    >{{ bookmarklet() }}</code
+  >
+  <button
+    class="flex items-center rounded-r bg-gray-500 px-4 text-lg text-white"
+    (click)="copyToClipboard(bookmarklet())"
+  >
+    <ng-icon name="tablerCopy" />
+  </button>
+</div>
 
 <ngs-code-editor
   [theme]="editorTheme"

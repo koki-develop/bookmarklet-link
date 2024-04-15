@@ -1,8 +1,9 @@
-import { CommonModule } from '@angular/common';
 import { Component, computed, inject, signal } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
 import { CodeEditorModule, CodeModel } from '@ngstack/code-editor';
 import copy from 'copy-to-clipboard';
+import { NgIconComponent, provideIcons } from '@ng-icons/core';
+import { tablerCopy, tablerLink } from '@ng-icons/tabler-icons';
+import { BookmarkletService } from '../../bookmarklet.service';
 
 const initialCode = `
 (function () {
@@ -13,14 +14,15 @@ const initialCode = `
 @Component({
   selector: 'app-home-page',
   standalone: true,
-  imports: [CommonModule, CodeEditorModule],
+  imports: [CodeEditorModule, NgIconComponent],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.css',
+  viewProviders: [provideIcons({ tablerCopy, tablerLink })],
 })
 export class HomePageComponent {
-  readonly #sanitizer = inject(DomSanitizer);
+  readonly #bookmarkletService = inject(BookmarkletService);
 
-  readonly code = signal<string>(initialCode);
+  readonly name = 'Bookmarklet';
 
   readonly codeModel: CodeModel = {
     language: 'javascript',
@@ -37,17 +39,19 @@ export class HomePageComponent {
     },
   };
 
+  readonly code = signal<string>(initialCode);
+
   readonly bookmarklet = computed(() => {
     const code = this.code();
-    return `javascript:${encodeURIComponent(code)}`;
+    return this.#bookmarkletService.toBookmarklet(code);
   });
 
   readonly sanitizedBookmarklet = computed(() => {
     const bookmarklet = this.bookmarklet();
-    return this.#sanitizer.bypassSecurityTrustUrl(bookmarklet);
+    return this.#bookmarkletService.sanitize(bookmarklet);
   });
 
-  copyToClipboard() {
-    copy(this.bookmarklet());
+  copyToClipboard(value: string) {
+    copy(value);
   }
 }
