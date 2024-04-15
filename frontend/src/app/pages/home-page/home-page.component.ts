@@ -1,10 +1,8 @@
 import { Component, signal } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { tablerArrowBigUp, tablerPlayerPlay } from '@ng-icons/tabler-icons';
-import { CodeEditorModule, CodeModel } from '@ngstack/code-editor';
-import { PreviewComponent } from './components/preview/preview.component';
 import { EditorComponent } from './components/editor/editor.component';
+import { PreviewComponent } from './components/preview/preview.component';
 
 const initialCode = `
 (function() {
