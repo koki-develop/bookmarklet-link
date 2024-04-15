@@ -14,4 +14,8 @@ export class BookmarkletService {
   sanitize(bookmarklet: string) {
     return this.#sanitizer.bypassSecurityTrustUrl(bookmarklet);
   }
+
+  run(code: string) {
+    eval(code);
+  }
 }
